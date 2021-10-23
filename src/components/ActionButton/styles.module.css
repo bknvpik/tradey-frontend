@@ -1,0 +1,40 @@
+@import '../../_settings/_variables.css';
+
+.button {
+    background: var(--green-1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0;
+    outline: 0;
+    display: block;
+    font-family: var(--primary-font);
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+}
+
+.button:hover {
+    background: var(--green-2);
+}
+
+/* size */
+
+.small {
+    padding: 0.3em 1.7em;
+}
+  
+.medium {
+    padding: 0.6em 2em;
+}
+  
+.large {
+    padding: 1em 2.4em;
+}
+
+.disabled, .disabled:hover{
+  color: var(--grey-1);
+  background: var(--grey-2);
+  border-color: var(--grey-1);
+  cursor: default;
+}
