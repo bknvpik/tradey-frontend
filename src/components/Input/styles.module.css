@@ -1,0 +1,19 @@
+.input {
+    all: unset;
+    border-bottom: solid 4px var(--green-1);
+    text-align: center;
+}
+
+/* size */
+
+.small {
+    height: 2em;
+}
+
+.medium {
+
+}
+
+.large {
+
+}

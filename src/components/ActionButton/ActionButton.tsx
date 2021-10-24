@@ -14,16 +14,16 @@ export const ButtonSize = {
     LARGE: 'large',
 }
 
-type Props = {
+export type ButtonProps = {
     type: 'submit' | 'reset' | 'button',
     size: string,
-    onClick: MouseEventHandler<HTMLButtonElement>,
-    children: ReactNode,
-    className: string,
-    disabled: boolean
+    onClick?: MouseEventHandler<HTMLButtonElement>,
+    children?: ReactNode,
+    className?: string,
+    disabled?: boolean
 }
 
-const ActionButton = (props: Props) => {
+const ActionButton = (props: ButtonProps) => {
     const { type, size, onClick, children, className, disabled } = props;
     const classProps = classnames(
         styles.button,

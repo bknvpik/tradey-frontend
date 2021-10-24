@@ -1,7 +1,12 @@
 import axios from 'axios';
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import ActionButton from '../../components/ActionButton/ActionButton'
+import Copyright from '../../components/Copyright/Copyright';
+import Input from '../../components/Input/Input';
 import { Logo } from '../../components/Logo/Logo'
+import TextLink from '../../components/TextLink/TextLink';
+import http from '../../http-common';
+import { SignInUpLayout } from '../../layouts/SignInUpLayout/SignInUpLayout';
 
 export const SignIn = () => {
     const [credentials, setCredentials] = useState({
@@ -15,29 +20,35 @@ export const SignIn = () => {
             ...credentials,
             [e.target.name]: value
         });
-        console.log(credentials);
     }
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/login', credentials)
+        http.post('login', credentials)
         .then(res => {
             console.log(res);
         })
     }
 
     return (
-        <div>
-            <Logo />
-            <form onSubmit={ handleSubmit }>
-                <input type="text" name="username" placeholder="e-mail" value={credentials.username} onChange={ handleChange }/>
-                <input type="password" name="password" placeholder="password" value={credentials.password} onChange={ handleChange }/>
-                <ActionButton type="submit" size="medium" disabled={ false }>
-                    sign in
-                </ActionButton>
-            </form>
-            <div>or create an account</div>
-            <div>TRADEY 2021</div>
-        </div>
+        <SignInUpLayout
+            form={{ onSubmit: handleSubmit }}
+            inputs={
+                [
+                    {type: "text", name: "username", placeholder: "e-mail", value: credentials.username, onChange: handleChange},
+                    {type: "password", name: "password", placeholder: "password", value: credentials.password, onChange: handleChange}
+                ]
+            }
+            button={{
+                type: "submit",
+                size: "medium",
+                disabled: false
+            }}
+            textLink={{
+                before: "or ",
+                linkText: "create ",
+                after: "an account"
+            }}
+        />
     )
 }
