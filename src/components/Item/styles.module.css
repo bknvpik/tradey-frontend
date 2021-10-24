@@ -1,0 +1,28 @@
+.item-container {
+    flex-basis: 49%;
+}
+
+@media (min-width: 900px) {
+    .item-container {
+        flex-basis: 30%;
+    }
+}
+
+.item-label {
+    background: var(--green-2);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.item-details {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-likes {
+    flex-basis: 100%;
+    text-align: center;
+}

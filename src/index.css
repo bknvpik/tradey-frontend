@@ -1,4 +1,5 @@
 @import './_settings/_variables.css';
+@import './_settings/_utility.css';
 
 *,
 *::before,
@@ -18,9 +19,4 @@ h2,
 h3,
 p {
     margin: 0;
-}
-
-.main-container {
-    margin-inline: auto;
-    width: min(90%, 70.5rem);
 }

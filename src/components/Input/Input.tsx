@@ -9,7 +9,7 @@ export const InputType = {
 }
 
 export type InputProps = {
-    type: 'number' | 'password' | 'text',
+    type: string,
     name: string,
     placeholder: string,
     value: string,
