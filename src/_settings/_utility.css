@@ -1,0 +1,46 @@
+.main-container {
+    margin-inline: auto;
+    width: min(80%, 70rem);
+}
+
+.bg-green-1 {
+    background: var(--green-1);
+}
+
+.bg-green-2 {
+    background: var(--green-2);
+}
+
+.font-xs {
+    font-size: 0.3em;
+}
+
+.font-s {
+    font-size: 0.5em;
+}
+
+.font-m {
+    font-size: 0.8em;
+}
+
+.font-l {
+    font-size: 1em;
+}
+
+.fong-xl {
+    font-size: 1.5em;
+}
+
+.fx-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.fx-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.fx-basis-100 {
+    flex-basis: 100%;
+}

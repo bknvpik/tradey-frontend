@@ -14,20 +14,27 @@ export const ButtonSize = {
     LARGE: 'large',
 }
 
-type Props = {
-    type: 'submit' | 'reset' | 'button',
-    size: string,
-    onClick: MouseEventHandler<HTMLButtonElement>,
-    children: ReactNode,
-    className: string,
-    disabled: boolean
+export const ButtonTheme = {
+    ACTION: 'action',
+    NAV: 'nav'
 }
 
-const ActionButton = (props: Props) => {
-    const { type, size, onClick, children, className, disabled } = props;
+export type ButtonProps = {
+    type: 'submit' | 'reset' | 'button',
+    size?: string,
+    theme?: string,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
+    children?: ReactNode,
+    className?: string,
+    disabled?: boolean
+}
+
+const ActionButton = (props: ButtonProps) => {
+    const { type, size, theme, onClick, children, className, disabled } = props;
     const classProps = classnames(
         styles.button,
-        styles[size],
+        styles[size? size: ButtonSize.MEDIUM],
+        styles[theme? theme: ButtonTheme.ACTION],
         {
             [styles.disabled]: disabled,
         },
@@ -44,6 +51,7 @@ const ActionButton = (props: Props) => {
 ActionButton.defaultProps = {
     type: ButtonType.BUTTON,
     size: ButtonSize.MEDIUM,
+    theme: ButtonTheme.ACTION,
     onClick: () => {},
     className: '',
     disabled: false

@@ -1,0 +1,9 @@
+.text-link {
+    color: var(--green-1);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.text-link:hover {
+    color: var(--green-2);
+}
