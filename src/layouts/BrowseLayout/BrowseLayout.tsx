@@ -13,8 +13,14 @@ export const BrowseLayout = (props: Props) => {
             <div className={ styles['items-container'] }>
                 { items.map(item =>
                     <Item
+                        id={ item.id }
+                        key={ item.name }
                         name={ item.name }
                         brand={ item.brand }
+                        description={ item.description }
+                        category={ item.category }
+                        size={ item.size }
+                        condition={ item.condition }
                     />
                 ) }
             </div>

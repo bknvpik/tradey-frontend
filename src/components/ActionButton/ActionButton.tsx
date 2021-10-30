@@ -20,7 +20,7 @@ export const ButtonTheme = {
 }
 
 export type ButtonProps = {
-    type: 'submit' | 'reset' | 'button',
+    type?: "submit" | "button" | "reset" | undefined,
     size?: string,
     theme?: string,
     onClick?: MouseEventHandler<HTMLButtonElement>,

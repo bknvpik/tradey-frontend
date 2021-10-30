@@ -11,6 +11,26 @@
     background: var(--green-2);
 }
 
+.shadow-in {
+    box-shadow: var(--shadow-in);
+}
+
+.font-w-200 {
+    font-weight: 200;
+}
+
+.font-w-400 {
+    font-weight: 400;
+}
+
+.font-w-500 {
+    font-weight: 500;
+}
+
+.font-w-600 {
+    font-weight: 600;
+}
+
 .font-xs {
     font-size: 0.3em;
 }
@@ -27,7 +47,7 @@
     font-size: 1em;
 }
 
-.fong-xl {
+.font-xl {
     font-size: 1.5em;
 }
 
@@ -41,6 +61,39 @@
     flex-direction: column;
 }
 
+.fx-center-all {
+    align-items: center;
+    justify-content: center;
+}
+
+.fx-i-start {
+    align-items: flex-start;
+}
+
+.fx-i-end {
+    align-items: flex-end;
+}
+
+.fx-c-start {
+    justify-content: flex-start;
+}
+
+.fx-c-end {
+    justify-content: flex-end;
+}
+
 .fx-basis-100 {
     flex-basis: 100%;
+}
+
+.fx-basis-50 {
+    flex-basis: 50%;
+}
+
+.fx-basis-70 {
+    flex-basis: 70%;
+}
+
+.fx-basis-30 {
+    flex-basis: 30%;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ActionButton, { ButtonProps } from '../ActionButton/ActionButton';
 import { Logo } from '../Logo/Logo';
 import styles from './styles.module.css';
@@ -26,7 +27,7 @@ export const Navigation = (props: NavigationProps) => {
                         disabled={ button.disabled }
                         theme={ button.theme }
                     >
-                        { button.children }
+                        <Link to={`/items`}>{ button.children }</Link>
                     </ActionButton>
                 )}
             </div>

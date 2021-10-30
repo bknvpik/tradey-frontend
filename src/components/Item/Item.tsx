@@ -2,8 +2,13 @@ import ActionButton, { ButtonSize } from '../ActionButton/ActionButton';
 import styles from './styles.module.css';
 
 export type ItemProps = {
+    id: string,
     name: string,
+    description: string,
     brand: string,
+    category: string,
+    size: string,
+    condition: string
 
 }
 

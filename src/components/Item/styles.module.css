@@ -1,5 +1,6 @@
 .item-container {
-    flex-basis: 49%;
+    flex-basis: 100%;
+
 }
 
 @media (min-width: 900px) {

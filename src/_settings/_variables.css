@@ -11,6 +11,10 @@
     --atenttion: #2196f3;
     --wait: #fff8dd;
     --error: #d92525;
+
+    /* shadow settings */
+    --shadow-in: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    --shadow-drop: 0px 4px 4px rgba(0, 0, 0, 0.25);
   
     /* fonts */
     --primary-font: 'Montseratt', sans-serif;
