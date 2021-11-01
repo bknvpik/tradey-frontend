@@ -1,0 +1,32 @@
+.message {
+    width: auto;
+    height: auto;
+    justify-self: flex-end;
+    padding: 0.5em;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.error {
+    color: var(--error);
+    border: 2px solid var(--error);
+    background: var(--error-bg);
+}
+
+.warning {
+    color: var(--warn);
+    border: 2px solid var(--warn);
+    background: var(--warn-bg);
+}
+
+.success {
+    color: var(--success);
+    border: 2px solid var(--success);
+    background: var(--success-bg);
+}
+
+.info {
+    color: var(--info);
+    border: 2px solid var(--info);
+    background: var(--info-bg);
+}

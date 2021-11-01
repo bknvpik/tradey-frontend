@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { ReactNode } from 'react';
-import FullBox from '../../components/FullBox/FullBox';
+import Box from '../../components/Box/Box';
 import styles from './styles.module.css';
 
 export type ItemDetailProps = {
@@ -19,16 +19,16 @@ const ItemDetail = (props: ItemDetailProps) => {
 
     return (
         <div className={ classProps }>
-            <FullBox
+            <Box
                 className="font-w-600"
             >
                 { detailName }
-            </FullBox>
-            <FullBox
+            </Box>
+            <Box
                 className="fx-c-end"
             >
                 { detail }
-            </FullBox>
+            </Box>
         </div>
     )
 }

@@ -24,7 +24,7 @@ export const SignIn = () => {
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
-        http.post('login', credentials)
+        http.post('login', credentials, { withCredentials: true })
         .then(res => {
             console.log(res);
         })
@@ -44,11 +44,7 @@ export const SignIn = () => {
                 size: "medium",
                 disabled: false
             }}
-            textLink={{
-                before: "or ",
-                linkText: "create ",
-                after: "an account"
-            }}
+            buttonText="sign in"
         />
     )
 }

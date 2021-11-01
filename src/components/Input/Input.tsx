@@ -14,13 +14,15 @@ export type InputProps = {
     placeholder: string,
     value: string,
     onChange: ChangeEventHandler<HTMLInputElement>,
+    className?: string
 }
 
 const Input = (props: InputProps) => {
-    const { type, name, placeholder, value, onChange } = props;
+    const { type, name, placeholder, value, className, onChange } = props;
     const classProps = classnames(
         styles.input,
-        styles.small
+        styles.small,
+        className
     )
     return (
         <input 

@@ -3,6 +3,47 @@
     width: min(80%, 70rem);
 }
 
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.wh-100 {
+    width: 100%;
+    height: 100%;
+}
+
+.m-h-small {
+    margin: 0 1em 0 1em;
+}
+
+.p-h-small {
+    padding: 0 1em 0 1em;
+}
+
+.p-h-large {
+    padding: 0 5em 0 5em;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-none {
+    display: none;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
 .bg-green-1 {
     background: var(--green-1);
 }
@@ -13,6 +54,10 @@
 
 .shadow-in {
     box-shadow: var(--shadow-in);
+}
+
+.text-center {
+    text-align: center;
 }
 
 .font-w-200 {
@@ -64,6 +109,22 @@
 .fx-center-all {
     align-items: center;
     justify-content: center;
+}
+
+.fx-i-center {
+    align-items: center;
+}
+
+.fx-c-center {
+    justify-content: center;
+}
+
+.fx-between {
+    justify-content: space-between;
+}
+
+.fx-around {
+    justify-content: space-around;
 }
 
 .fx-i-start {

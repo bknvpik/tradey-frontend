@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { MouseEventHandler, ReactChild, ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
 import  styles from './styles.module.css';
 
 export const ButtonType = {
@@ -16,7 +17,7 @@ export const ButtonSize = {
 
 export const ButtonTheme = {
     ACTION: 'action',
-    NAV: 'nav'
+    NAV: 'nav',
 }
 
 export type ButtonProps = {
@@ -26,11 +27,12 @@ export type ButtonProps = {
     onClick?: MouseEventHandler<HTMLButtonElement>,
     children?: ReactNode,
     className?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    linkTo?: string
 }
 
 const ActionButton = (props: ButtonProps) => {
-    const { type, size, theme, onClick, children, className, disabled } = props;
+    const { type, size, theme, onClick, children, className, disabled, linkTo } = props;
     const classProps = classnames(
         styles.button,
         styles[size? size: ButtonSize.MEDIUM],
@@ -42,9 +44,18 @@ const ActionButton = (props: ButtonProps) => {
     )
 
     return (
-        <button type={ type } onClick={ onClick } disabled={ disabled } className={ classProps }>
-            { children }
-        </button>
+        <>
+        {linkTo ?
+            <NavLink to={ linkTo } className={ classnames( styles.button, styles.small, styles.action, styles['nav-link']) } activeStyle={{ background: 'var(--grey-1)', color: 'var(--green-2)' }}>
+                { children }
+            </NavLink>
+            :
+            <button type={ type } onClick={ onClick } disabled={ disabled } className={ classProps }>
+                { children }
+            </button>
+        }
+
+        </>
     )
 }
 

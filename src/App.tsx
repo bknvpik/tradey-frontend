@@ -19,15 +19,6 @@ function App() {
       {/* <SignIn/> */}
 
       <Routing>
-        <Navigation
-          buttons={[
-            { type: "button", theme: "nav", children: "browse" },
-            { type: "button", theme: "nav", children: "add item" },
-            { type: "button", theme: "nav", children: "about" },
-            { type: "button", theme: "nav", children: "my profile" },
-            { type: "button", theme: "nav", children: "sign out" },
-          ]}
-        />
       </Routing>
     </div>
   );

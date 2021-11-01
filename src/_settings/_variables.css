@@ -7,10 +7,14 @@
     --green-2: #B7E4C7;
     --grey-1: #303030;
     --grey-2: #919191;
-    --success: #2a7e2e;
-    --atenttion: #2196f3;
-    --wait: #fff8dd;
+    --success: #17a71f;
+    --success-bg: #a3dda6;
+    --info: #2196f3;
+    --info-bg: #a9d3f5;
+    --warn: #ffd83b;
+    --warn-bg: #fff2bd;
     --error: #d92525;
+    --error-bg: #f39191;
 
     /* shadow settings */
     --shadow-in: inset 0px 4px 4px rgba(0, 0, 0, 0.25);

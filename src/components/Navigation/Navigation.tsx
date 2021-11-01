@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import ActionButton, { ButtonProps } from '../ActionButton/ActionButton';
 import { Logo } from '../Logo/Logo';
 import styles from './styles.module.css';
@@ -16,19 +16,21 @@ export const Navigation = (props: NavigationProps) => {
                 <div className={ styles['navbar-header'] }>
                     <div className={ styles['content-container'] }></div>
                     <div className={ styles['content-container'] }>
-                        <Logo />
+                        <Logo size={ 'small' }/>
                     </div>
                     <div className={ styles['content-container'] }></div>
                 </div>
                 {buttons.map(button => 
-                    <ActionButton
-                        type={ button.type }
-                        size={ button.size }
-                        disabled={ button.disabled }
-                        theme={ button.theme }
-                    >
-                        <Link to={`/items`}>{ button.children }</Link>
-                    </ActionButton>
+                    <NavLink to={ 'sign-up' } style={{ textDecoration: 'none' , flexBasis: '100%'}}>
+                        <ActionButton
+                            type={ button.type }
+                            size={ button.size }
+                            disabled={ button.disabled }
+                            theme={ button.theme }
+                        >
+                                { button.children }
+                        </ActionButton>
+                    </NavLink>
                 )}
             </div>
         </div>

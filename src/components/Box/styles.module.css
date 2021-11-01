@@ -1,0 +1,15 @@
+.small {
+    flex-basis: 30%;
+}
+
+.medium {
+    flex-basis: 50%;
+}
+
+.large {
+    flex-basis: 70%;
+}
+
+.full {
+    flex-basis: 100%;
+}
