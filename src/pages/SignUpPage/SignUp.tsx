@@ -4,6 +4,7 @@ import http from '../../http-common';
 
 export const SignUp = () => {
     const [user, setUser] = useState({
+        eMail: '',
         username: '',
         password: '',
         repeatPassword: ''
@@ -20,8 +21,9 @@ export const SignUp = () => {
     const handleSubmit = (e: SyntheticEvent) => {
         console.log(user)
         http.post('sign-up', {
-            eMail: user.username,
-            password: user.password
+            eMail: user.eMail,
+            password: user.password,
+            username: user.username
         })
         .then(res => {
             console.log(res);
@@ -29,11 +31,12 @@ export const SignUp = () => {
         clearData();
     }
 
-    function clearData() {
+    const clearData = () => {
         setUser({
-            username: "",
-            password: "",
-            repeatPassword: ""
+            eMail: '',
+            username: '',
+            password: '',
+            repeatPassword: ''
         });
     }
     
@@ -42,7 +45,8 @@ export const SignUp = () => {
             form={{ onSubmit: handleSubmit }}
             inputs={
                 [
-                    {type: "text", name: "username", placeholder: "e-mail", value: user.username, onChange: handleChange},
+                    {type: "text", name: "eMail", placeholder: "e-mail", value: user.eMail, onChange: handleChange},
+                    {type: "text", name: "username", placeholder: "username", value: user.username, onChange: handleChange},
                     {type: "password", name: "password", placeholder: "password", value: user.password, onChange: handleChange},
                     {type: "password", name: "repeatPassword", placeholder: "repeat password", value: user.repeatPassword, onChange: handleChange}
                 ]

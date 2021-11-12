@@ -1,6 +1,11 @@
-.input {
+.underlined {
     all: unset;
     border-bottom: solid 4px var(--green-2);
+    text-align: center;
+}
+
+.blank {
+    all: unset;
     text-align: center;
 }
 

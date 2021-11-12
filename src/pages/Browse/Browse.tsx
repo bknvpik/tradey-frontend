@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import styles from 'styles.module.css';
+import Footer from '../../components/Footer/Footer';
+import Navigation from '../../components/Navigation/Navigation';
 import http from '../../http-common';
-import { BrowseLayout } from '../../layouts/BrowseLayout/BrowseLayout';
+import { HomepageBrowseLayout } from '../../layouts/HomepageBrowseLayout/HomepageBrowseLayout';
 
 export const Browse = () => {
     const [items, setItems] = useState([]);
@@ -14,6 +15,13 @@ export const Browse = () => {
     }, []);
     
     return (
-        <BrowseLayout items={ items } />
+        <>
+            <Navigation />
+                <HomepageBrowseLayout
+                    items={ items }
+                    headerTxt={ 'Browse Items' }
+                />
+            <Footer />
+        </>
     )
 }

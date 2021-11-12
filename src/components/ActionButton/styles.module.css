@@ -21,8 +21,8 @@
 /* size */
 
 .small {
-    font-size: 0.5em;
-    padding: 0.3em 1.7em;
+    font-size: 0.6em;
+    padding: 0.4em 1.7em;
 }
   
 .medium {
@@ -45,6 +45,12 @@
 .nav {
     flex-basis: 100%;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.light {
+    flex-basis: 100%;
+    background: var(--green-2);
+    font-weight: normal;
 }
 
 @media (min-width: 900px) {

@@ -1,25 +1,21 @@
-import React from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { Cookies, useCookies } from 'react-cookie';
 import './App.css';
-import axios from 'axios';
-import ActionButton from './components/ActionButton/ActionButton';
-import { SignIn } from './pages/SignInPage/SignIn';
-import { SignUp } from './pages/SignUpPage/SignUp';
-import { Navigation } from './components/Navigation/Navigation';
-import { Item } from './components/Item/Item';
-import { Browse } from './pages/Browse/Browse';
-import { AddItem } from './pages/AddItem.tsx/AddItem';
-import ItemViewLayout from './layouts/ItemViewLayout/ItemViewLayout';
-import ItemView from './pages/ItemView/ItemView';
+import Navigation from './components/Navigation/Navigation';
+import { AuthContext } from './context/AuthContext';
+import { Homepage } from './pages/Homepage/Homepage';
 import { Routing } from './services/Routing';
 
+const App = () => {
+  
+  const [auth, setAuth] = useState(false);
 
-function App() {
   return (
     <div className="App">
-      {/* <SignIn/> */}
-
+    <AuthContext.Provider value={{ auth, setAuth }}>
       <Routing>
       </Routing>
+    </AuthContext.Provider>
     </div>
   );
 }

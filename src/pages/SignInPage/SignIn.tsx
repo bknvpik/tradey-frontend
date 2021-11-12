@@ -1,14 +1,10 @@
-import axios from 'axios';
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
-import ActionButton from '../../components/ActionButton/ActionButton'
-import Copyright from '../../components/Copyright/Copyright';
-import Input from '../../components/Input/Input';
-import { Logo } from '../../components/Logo/Logo'
-import TextLink from '../../components/TextLink/TextLink';
+import { useHistory } from 'react-router-dom';
 import http from '../../http-common';
 import { SignInUpLayout } from '../../layouts/SignInUpLayout/SignInUpLayout';
 
-export const SignIn = () => {
+const SignIn = (props: any) => {
+    
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
@@ -27,6 +23,7 @@ export const SignIn = () => {
         http.post('login', credentials, { withCredentials: true })
         .then(res => {
             console.log(res);
+            props.history.push("/browse");
         })
     }
 
@@ -48,3 +45,5 @@ export const SignIn = () => {
         />
     )
 }
+
+export default SignIn;

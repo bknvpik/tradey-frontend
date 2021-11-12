@@ -1,0 +1,26 @@
+.info-block {
+    width: 100%;
+    min-height: 2em;
+    box-shadow: var(--shadow-drop);
+    display: flex;
+}
+
+.info-block p {
+    flex-basis: 100%;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: auto;
+    padding: var(--mp-s-h);
+}
+
+.info-block span {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
+    padding: var(--mp-s-h);
+}
+
+.info-block input {
+    flex-basis: 100%;
+}

@@ -18,6 +18,7 @@ export const ButtonSize = {
 export const ButtonTheme = {
     ACTION: 'action',
     NAV: 'nav',
+    LIGHT: 'light'
 }
 
 export type ButtonProps = {

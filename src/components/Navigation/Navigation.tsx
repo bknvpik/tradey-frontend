@@ -1,38 +1,44 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import ActionButton, { ButtonProps } from '../ActionButton/ActionButton';
-import { Logo } from '../Logo/Logo';
+import Box, { BoxSize } from '../Box/Box';
+import { Logo, LogoSize } from '../Logo/Logo';
 import styles from './styles.module.css';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export type NavigationProps ={
-    buttons: ButtonProps[],
+export type NavigationProps = {
+    open: boolean,
 }
 
-export const Navigation = (props: NavigationProps) => {
-    const { buttons } = props;
+const Navigation = (props: any) => {
     return (
-        <div className={ styles['main-container'] }>
-            <div className={ styles.navbar }>
-                <div className={ styles['navbar-header'] }>
-                    <div className={ styles['content-container'] }></div>
-                    <div className={ styles['content-container'] }>
-                        <Logo size={ 'small' }/>
-                    </div>
-                    <div className={ styles['content-container'] }></div>
+        <div className={ classNames(
+            styles['navigation'],
+            'fx-row',
+            'fx-center-all'
+        ) }>
+            <Box
+                size={ BoxSize.SMALL }
+            >
+                <div className={ 'wh-100 fx-row fx-center-all' }>
+                    <FontAwesomeIcon icon={ faBars } className={ 'fa-lg font-green-1' } />
                 </div>
-                {buttons.map(button => 
-                    <NavLink to={ 'sign-up' } style={{ textDecoration: 'none' , flexBasis: '100%'}}>
-                        <ActionButton
-                            type={ button.type }
-                            size={ button.size }
-                            disabled={ button.disabled }
-                            theme={ button.theme }
-                        >
-                                { button.children }
-                        </ActionButton>
-                    </NavLink>
-                )}
-            </div>
+            </Box>
+            <Box 
+                className={ 'fx-row fx-center-all' }
+            >
+                <Logo size={ LogoSize.SMALL } />
+            </Box>
+            <Box
+                size={ BoxSize.SMALL }
+                className={ 'fx-row h-100 fx-center-all' }
+            >
+                { props.open && <FontAwesomeIcon icon={ faTimes } className={ 'fa-lg font-green-1' } /> }
+            </Box>
         </div>
     )
 }
+
+export default Navigation;

@@ -1,0 +1,11 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about {
+    padding: var(--mp-s);
+    flex: 1;
+    box-shadow: var(--shadow-drop);
+}

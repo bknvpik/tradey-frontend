@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 :root {
 
@@ -19,8 +19,23 @@
     /* shadow settings */
     --shadow-in: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     --shadow-drop: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    --shadow-drop-up: 0px -4px 4px rgba(0, 0, 0, 0.25);
   
     /* fonts */
-    --primary-font: 'Montseratt', sans-serif;
+    --primary-font: 'Montserrat', sans-serif;
     --base-font-lineheight: 1.5em;
+
+    /* margins, paddings */
+    --mp-s: 0.5em;
+    --mp-m: 1em;
+    --mp-l: 1.5em;
+
+    --mp-s-v: 0.5em 0 0.5em 0;
+    --mp-m-v: 0.5em 0 0.5em 0;
+    --mp-l-v: 1.5em 0 1.5em 0;
+
+    --mp-s-h: 0 0.5em 0 0.5em;
+    --mp-m-h: 0 1em 0 1em;
+    --mp-l-h: 0 1.5em 0 1.5em;
+
 }

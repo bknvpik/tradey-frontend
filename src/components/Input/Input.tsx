@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { ChangeEventHandler } from 'react';
+import { ButtonTheme } from '../ActionButton/ActionButton';
 import  styles from './styles.module.css';
 
 export const InputType = {
@@ -8,8 +9,14 @@ export const InputType = {
     TEXT:'text'
 }
 
+export const InputTheme = {
+    UNDERLINED: 'underlined',
+    BLANK: 'blank'
+}
+
 export type InputProps = {
     type: string,
+    theme?: string,
     name: string,
     placeholder: string,
     value: string,
@@ -18,9 +25,9 @@ export type InputProps = {
 }
 
 const Input = (props: InputProps) => {
-    const { type, name, placeholder, value, className, onChange } = props;
+    const { type, name, placeholder, value, className, theme, onChange } = props;
     const classProps = classnames(
-        styles.input,
+        styles[theme? theme: InputTheme.UNDERLINED],
         styles.small,
         className
     )
@@ -40,6 +47,7 @@ const Input = (props: InputProps) => {
 Input.defaultProps = {
     type: InputType.TEXT,
     name: '',
+    theme: InputTheme.UNDERLINED,
     placeholder: '',
     value: '',
     onChange: () => {},
