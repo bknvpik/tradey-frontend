@@ -1,1 +1,2 @@
-export const itemImagesUrl = process.env.PUBLIC_URL + process.env.REACT_APP_ITEM_IMAGES;
+export const itemImagesUrl = '/public/resources/item_images/';
+export const userImagesUrl = '/public/resources/user_images/';

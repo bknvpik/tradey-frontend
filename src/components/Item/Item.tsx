@@ -1,12 +1,13 @@
 import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ActionButton, { ButtonSize } from '../ActionButton/ActionButton';
 import Box from '../Box/Box';
 import Label from '../Label/Label';
 import Image, { ImageType } from '../Image/Image';
 import styles from './styles.module.css';
 import ItemImg from './ItemImg';
+import { useState } from 'react';
 
 export type ItemProps = {
     id: string,
@@ -18,14 +19,34 @@ export type ItemProps = {
     condition: {id: string, condition: string},
     views?: number,
     likes?: number,
-    images: {id: string, image: string}[]
+    images: {id: string, image: string}[],
+    select?: any;
+    unselect?: any;
+    type?: string;
 }
 
 const Item = (props: ItemProps) => {
-    const { id, name, views, likes, images } = props;
+    let history = useHistory();
 
-    const trade = (id: string) => {
-        
+    const { id, name, views, likes, images, select, unselect, type } = props;
+    const [selected, setSelected] = useState(false);
+
+    const trade = () => {
+        console.log('test');
+        console.log(id)
+        history.push(`/make-offer/${id}`);
+    }
+
+    const handleSelect = () => {
+        select(id)
+        setSelected(true);
+        console.log(id)
+    }
+
+    const handleUnselect = () => {
+        unselect(id)
+        setSelected(false);
+        console.log(id)
     }
 
     return (
@@ -35,12 +56,13 @@ const Item = (props: ItemProps) => {
                     type={ ImageType.ITEM }
                     image={ images[0] } 
                 />
-                <Label
-                    name={ name }
-                    views={ views }
-                    likes={ likes }
-                />
             </Link>
+            <Label
+                name={ name }
+                views={ views }
+                likes={ likes }
+                buttonOnClick={ selected === false && type === 'offer' ? handleSelect : selected === true && type === 'offer' ? handleUnselect : trade }
+            />
         </Box>
     )
 }

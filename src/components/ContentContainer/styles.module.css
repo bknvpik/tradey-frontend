@@ -1,0 +1,5 @@
+.content-container {
+    margin-inline: auto;
+    width: min(85%, 70rem);
+    max-height: 100%;
+}

@@ -16,11 +16,11 @@ export type LabelProps = {
     views?: number | undefined,
     numberOfItems?: number | undefined,
     trades?: number | undefined,
-    buttonOnClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+    buttonOnClick?: any;
 }
 
 const Label = (props: LabelProps) => {
-    const { type, name, likes, views, numberOfItems, trades } = props;
+    const { type, name, likes, views, numberOfItems, trades, buttonOnClick } = props;
     
     return (
         <div className={ styles['label'] }>
@@ -35,7 +35,10 @@ const Label = (props: LabelProps) => {
                         <p>{ likes }</p>
                     </div>
                     <div className={ styles['data'] }>
-                        <ActionButton size={ ButtonSize.SMALL }>
+                        <ActionButton
+                            size={ ButtonSize.SMALL }
+                            onClick={ buttonOnClick }
+                        >
                             trade
                         </ActionButton>
                     </div>

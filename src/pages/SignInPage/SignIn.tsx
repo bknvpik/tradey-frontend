@@ -5,6 +5,8 @@ import { SignInUpLayout } from '../../layouts/SignInUpLayout/SignInUpLayout';
 
 const SignIn = (props: any) => {
     
+    let history = useHistory();
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
@@ -23,7 +25,10 @@ const SignIn = (props: any) => {
         http.post('login', credentials, { withCredentials: true })
         .then(res => {
             console.log(res);
-            props.history.push("/browse");
+            
+        })
+        .then(() => {
+            history.push("/homepage");
         })
     }
 

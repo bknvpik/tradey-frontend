@@ -19,12 +19,12 @@ const ViewUser = () => {
         .then(res => {
             setUserDetails(res.data);
         })
+        .catch((err: Error | AxiosError) => {
+            setError(err.message);
+        })
         .then(() => {
             setIsLoaded(true);
             console.log(userDetails);
-        })
-        .catch((err: Error | AxiosError) => {
-            setError(err.message);
         })
     }, [])
     

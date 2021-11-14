@@ -21,7 +21,7 @@ interface Test {
     user: string;
 }
 
-export const AddItem = () => {
+const AddItem = () => {
     const [resources, setResources] = useState({
         categories: [],
         conditions: [],
@@ -169,3 +169,5 @@ export const AddItem = () => {
         </AddItemLayout>
     )
 }
+
+export default AddItem;

@@ -25,8 +25,8 @@ const Image = (props: ImageProps) => {
         <div className={ classProps }>
             {image
                 ? (type === ImageType.ITEM
-                    ? <img src={ itemUrl + image.image } alt="item_image" />
-                    : <img src={ userUrl + image.image } alt="user_image" />)
+                    ? <img src={ '/resources/item_images/' + image.image } alt="item_image" />
+                    : <img src={ '/resources/item_images/' + image.image } alt="user_image" />)
                 : null
             }
         </div>

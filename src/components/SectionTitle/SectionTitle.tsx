@@ -1,16 +1,9 @@
-import React from 'react'
 import styles from './styles.module.css';
 
-type SectionTitleProps = {
-    text: string
-}
-
-const SectionTitle = (props: SectionTitleProps) => {
-    const { text } = props;
-
+const SectionTitle = (props: {text: string}) => {
     return (
         <div className={ styles['section-title'] }>
-            <p>{ text }</p>
+            <p>{ props.text }</p>
         </div>
     )
 }

@@ -1,0 +1,37 @@
+.item-offer {
+    height: 3em;
+    width: 100%;
+    box-shadow: var(--shadow-drop);
+    display: flex;
+}
+
+.item-offer p {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    display: flex;
+    flex: 1;
+}
+
+.item-index {
+    width: 3em;
+    height: 100%;
+}
+
+.unselect {
+    height: 100%;
+    width: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--error);
+}
+
+.unselect:hover {
+    background: var(--error-bg);
+}
