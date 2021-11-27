@@ -1,7 +1,6 @@
-import { Component, createContext, useContext, useEffect, useState } from 'react'
-import { Redirect, Route } from 'react-router'
-import { AuthContext } from '../Auth';
-import http from '../http-common';
+import { useContext } from 'react';
+import { Redirect, Route } from 'react-router';
+import { AuthContext } from './AuthContext';
 import Loading from '../pages/Loading/Loading';
 
 

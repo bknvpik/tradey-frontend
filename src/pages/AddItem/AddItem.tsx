@@ -161,9 +161,7 @@ const AddItem = () => {
                             )}
                         </select>
                     </InfoBlock>
-                    <ActionButton type={ "submit" } className="w-100">
-                        add
-                    </ActionButton>
+                    <ActionButton type={ "submit" } className="w-100" text={'add' } />
                 </Form>
             </Box>
         </AddItemLayout>

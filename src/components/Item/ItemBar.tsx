@@ -24,9 +24,7 @@ const ItemBar = (props: ItemBarProps) => {
                     <p>{ likes }</p>
                 </div>
                 <div className={ styles['item-data'] }>
-                    <ActionButton size={ ButtonSize.SMALL }>
-                        trade
-                    </ActionButton>
+                    <ActionButton size={ ButtonSize.SMALL } text={ 'trade' } />
                 </div>
                 <div className={ styles['item-data'] }>
                     <p>{ views }</p>

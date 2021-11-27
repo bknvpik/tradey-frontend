@@ -13,6 +13,7 @@ export const ButtonSize = {
     SMALL: 'small',
     MEDIUM: 'medium',
     LARGE: 'large',
+    FILL: 'fill'
 }
 
 export const ButtonTheme = {
@@ -21,19 +22,20 @@ export const ButtonTheme = {
     LIGHT: 'light'
 }
 
-export type ButtonProps = {
-    type?: "submit" | "button" | "reset" | undefined,
-    size?: string,
-    theme?: string,
-    onClick?: MouseEventHandler<HTMLButtonElement>,
-    children?: ReactNode,
-    className?: string,
-    disabled?: boolean,
-    linkTo?: string
+export interface ButtonProps {
+    type?: "submit" | "button" | "reset" | undefined;
+    size?: string;
+    theme?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    text?: string;
+    className?: string;
+    disabled?: boolean;
+    linkTo?: string;
+    children?: ReactNode;
 }
 
 const ActionButton = (props: ButtonProps) => {
-    const { type, size, theme, onClick, children, className, disabled, linkTo } = props;
+    const { type, size, theme, onClick, text, className, disabled, linkTo, children } = props;
     const classProps = classnames(
         styles.button,
         styles[size? size: ButtonSize.MEDIUM],
@@ -48,11 +50,11 @@ const ActionButton = (props: ButtonProps) => {
         <>
         {linkTo ?
             <NavLink to={ linkTo } className={ classnames( styles.button, styles.small, styles.action, styles['nav-link']) } activeStyle={{ background: 'var(--grey-1)', color: 'var(--green-2)' }}>
-                { children }
+                { text }
             </NavLink>
             :
             <button type={ type } onClick={ onClick } disabled={ disabled } className={ classProps }>
-                { children }
+                { text ? text : children ? children : null }
             </button>
         }
 

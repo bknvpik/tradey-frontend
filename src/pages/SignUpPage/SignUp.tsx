@@ -1,34 +1,75 @@
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { SignInUpLayout } from '../../layouts/SignInUpLayout/SignInUpLayout';
-import http from '../../http-common';
+import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
+import { SignUpState } from './types/sign-up-state';
+import { formValid, validationSignUp } from '../../services/form-validation.services';
+import SignInUpLayout from '../../layouts/SignInUpLayout/SignInUpLayout';   
+import { correctInputs } from '../../_assets/messages';
+import { signInUp } from '../../services/auth.services';
+import { signUpUrl } from '../../_assets/apiUrls';
+import { AuthContext } from '../../routing/AuthContext';
+import { Redirect } from 'react-router-dom';
+import { MessageType } from '../../components/Message/Message';
 
-export const SignUp = () => {
-    const [user, setUser] = useState({
+const SignUp = () => {
+    const { auth } = useContext(AuthContext);
+    const [message, setMessage] = useState<{type: string, text: string}>({type: '', text: ''});
+    const [user, setUser] = useState<SignUpState>({
         eMail: '',
         username: '',
         password: '',
-        repeatPassword: ''
+        repeatPassword: '',
+        isError: {
+            eMail: '',
+            username: '',
+            password: '',
+            repeatPassword: ''
+        }
     });
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        e.preventDefault();
+
+        const { name, value } = e.target;
+        let isError = { ...user.isError };
+        let password = user.password;
+        
+        let validated = validationSignUp(name, value, isError, password);
+
         setUser({
             ...user,
-            [e.target.name]: value
+            [e.target.name]: value,
+            isError: validated
         });
     }
 
-    const handleSubmit = (e: SyntheticEvent) => {
-        console.log(user)
-        http.post('sign-up', {
-            eMail: user.eMail,
-            password: user.password,
-            username: user.username
-        })
-        .then(res => {
-            console.log(res);
-        })
-        clearData();
+    const handleSubmit = (e: SyntheticEvent): void => {
+        e.preventDefault();
+
+        const { isError, repeatPassword, ...rest } = user;
+        
+        if(formValid(user)) {
+            signInUp(signUpUrl, rest, false)
+            .then((res) => {
+                setMessage({
+                    type: MessageType.SUCCESS,
+                    text: res.data.message
+                });
+            })
+            .catch((err) => {
+                setMessage(err.message);
+            })
+            .then(() => {
+                setMessage({
+                    type: '',
+                    text: ''
+                })
+                clearData();
+            });
+        }
+        else
+            setMessage({
+                type: MessageType.WARNING,
+                text: correctInputs
+            });
     }
 
     const clearData = () => {
@@ -36,27 +77,71 @@ export const SignUp = () => {
             eMail: '',
             username: '',
             password: '',
-            repeatPassword: ''
+            repeatPassword: '',
+            isError: {
+                eMail: '',
+                username: '',
+                password: '',
+                repeatPassword: ''
+            }
         });
     }
     
     return (
-        <SignInUpLayout
-            form={{ onSubmit: handleSubmit }}
-            inputs={
-                [
-                    {type: "text", name: "eMail", placeholder: "e-mail", value: user.eMail, onChange: handleChange},
-                    {type: "text", name: "username", placeholder: "username", value: user.username, onChange: handleChange},
-                    {type: "password", name: "password", placeholder: "password", value: user.password, onChange: handleChange},
-                    {type: "password", name: "repeatPassword", placeholder: "repeat password", value: user.repeatPassword, onChange: handleChange}
-                ]
+        <>
+            { auth
+                ? 
+                <Redirect to="/homepage" exact />
+                : 
+                <SignInUpLayout
+                    message={ message }
+                    onChange={ handleChange }
+                    onSubmit={ handleSubmit }
+                    inputs={[
+                        {
+                            type: 'text',
+                            name: 'eMail',
+                            placeholder: 'e-mail',
+                            value: user.eMail,
+                            isError: user.isError.eMail
+                        },
+                        {
+                            type: 'text',
+                            name: 'username',
+                            placeholder: 'username',
+                            value: user.username,
+                            isError: user.isError.username
+                        },
+                        {
+                            type: 'password',
+                            name: 'password',
+                            placeholder: 'password',
+                            value: user.password,
+                            isError: user.isError.password
+                        },
+                        {
+                            type: 'password',
+                            name: 'repeatPassword',
+                            placeholder: 'repeat password',
+                            value: user.repeatPassword,
+                            isError: user.isError.repeatPassword
+                        }
+                    ]}
+                    button={{
+                        type: 'submit',
+                        size: 'medium',
+                        text: 'sign up',
+                        disabled: formValid(user) ? false : true
+                    }}
+                    textLink={{
+                        before: "or ",
+                        text: "sign in",
+                        linkTo: "sign-in"
+                    }}
+                />
             }
-            button={{
-                type: "submit",
-                size: "medium",
-                disabled: false
-            }}
-            buttonText="sign up"
-        />
+        </>
     )
 }
+
+export default SignUp;

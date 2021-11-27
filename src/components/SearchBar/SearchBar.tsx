@@ -1,34 +1,42 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames'
-import React from 'react'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import ActionButton, { ButtonSize, ButtonTheme } from '../ActionButton/ActionButton'
 import Box from '../Box/Box';
+import FlexContainer from '../FlexContainer/FlexContainer';
 import Input, { InputTheme } from '../Input/Input'
 import styles from './styles.module.css';
 
-export const SearchBar = () => {
+const SearchBar = () => {
+    const [searchInput, setSearchInput] = useState('');
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        e.preventDefault();
+
+        setSearchInput(e.target.value);
+    }
+    
     return (
-        <div className={classNames(
-            styles['sb-container'],
-            'w-100',
-            'fx-col'
-        )}>
-            <Box
-                className={classNames(
-                    'fx-row'
-            )}>
-                <Input theme={ InputTheme.BLANK }/>
-                <ActionButton></ActionButton>
-            </Box>
-            <Box className={classNames(
-                'fx-row'
-            )}>
-                <ActionButton size={ButtonSize.SMALL } theme={ ButtonTheme.LIGHT }>
-                    sort by
+        <div className={ styles['search-bar'] }>
+            <FlexContainer flex={ 'flex-1' }>
+                <Input
+                    theme={ InputTheme.BLANK }
+                    name={ 'search' }
+                    placeholder={ 'search items...'}
+                    value={ searchInput }
+                    onChange={ handleChange }
+                />
+                <ActionButton size={ ButtonSize.FILL }>
+                    <FontAwesomeIcon icon={ faSearch } />
                 </ActionButton>
-                <ActionButton size={ButtonSize.SMALL } theme={ ButtonTheme.LIGHT }>
-                    filter
-                </ActionButton>
-            </Box>
+            </FlexContainer>
+            <FlexContainer flex={ 'flex-1' }>
+                <ActionButton size={ButtonSize.FILL } theme={ ButtonTheme.LIGHT } text={ 'sort' }/>
+                <ActionButton size={ButtonSize.FILL } theme={ ButtonTheme.LIGHT } text={ 'filter' } />
+            </FlexContainer>
         </div>
     )
 }
+
+export default SearchBar;

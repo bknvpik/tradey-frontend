@@ -1,5 +1,5 @@
 import './App.css';
-import Auth from './Auth';
+import Auth from './routing/Auth';
 import Routing from './routing/Routing';
 
 const App = () => {

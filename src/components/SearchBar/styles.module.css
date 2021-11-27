@@ -1,3 +1,6 @@
-.sb-container {
-    height: 4em;
+.search-bar {
+    margin-top: 1em;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
 }

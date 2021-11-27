@@ -17,10 +17,11 @@ export type LabelProps = {
     numberOfItems?: number | undefined,
     trades?: number | undefined,
     buttonOnClick?: any;
+    toggleLike?: any;
 }
 
 const Label = (props: LabelProps) => {
-    const { type, name, likes, views, numberOfItems, trades, buttonOnClick } = props;
+    const { type, name, likes, views, numberOfItems, trades, buttonOnClick, toggleLike } = props;
     
     return (
         <div className={ styles['label'] }>
@@ -31,16 +32,15 @@ const Label = (props: LabelProps) => {
                 {type === LabelType.ITEM &&
                 <>
                     <div className={ styles['data'] }>
-                        <FontAwesomeIcon icon={ faHeart } />
+                        <FontAwesomeIcon icon={ faHeart } onClick={ toggleLike }/>
                         <p>{ likes }</p>
                     </div>
                     <div className={ styles['data'] }>
                         <ActionButton
                             size={ ButtonSize.SMALL }
                             onClick={ buttonOnClick }
-                        >
-                            trade
-                        </ActionButton>
+                            text={ 'trade' }
+                        />
                     </div>
                     <div className={ styles['data'] }>
                         <p>{ views }</p>
@@ -55,9 +55,7 @@ const Label = (props: LabelProps) => {
                         <p>{ numberOfItems }</p>
                     </div>
                     <div className={ styles['data'] }>
-                        <ActionButton size={ ButtonSize.SMALL }>
-                            view items
-                        </ActionButton>
+                        <ActionButton size={ ButtonSize.SMALL } text={ 'view items' }/>
                     </div>
                     <div className={ styles['data'] }>
                         <p>{ trades }</p>

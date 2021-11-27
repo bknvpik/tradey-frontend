@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Auth";
+import { AuthContext } from "../../routing/AuthContext";
 import Navigation from "../../components/Navigation/Navigation";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import MainContainer from "../../components/MainContainer/MainContainer";
@@ -125,9 +125,7 @@ export const MakeOffer = () => {
                                 null
                             )
                         }
-                    <ActionButton onClick={ handleSubmit }>
-                        make offer
-                    </ActionButton>
+                    <ActionButton onClick={ handleSubmit } text={ 'make offer' } />
                     <SectionTitle text={ 'Add More Items' } />
                     <InfoLabel 
                         text={ 'Your Items' } 

@@ -1,9 +1,10 @@
 .message {
     width: auto;
     height: auto;
-    justify-self: flex-end;
+    text-align: center;
     padding: 0.5em;
     border-radius: 5px;
+    font-size: 0.9rem;
     font-weight: 600;
 }
 

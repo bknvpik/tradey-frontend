@@ -2,15 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
-export type TextLinkProps = {
-    before: string,
-    linkText: string,
-    after: string,
-    linkTo: string,
+export interface TextLinkProps {
+    before?: string;
+    text: string;
+    after?: string;
+    linkTo: string;
 }
 
 const TextLink = (props: TextLinkProps) => {
-    const { before, linkText, after, linkTo } = props;
+    const { before, text, after, linkTo } = props;
     return (
         <p>
             { before }
@@ -19,7 +19,7 @@ const TextLink = (props: TextLinkProps) => {
                     to={ linkTo }
                     style={{ all: 'unset' }}
                 >
-                    { linkText }
+                    { text }
                 </Link>
             </span>
             { after }
@@ -29,8 +29,9 @@ const TextLink = (props: TextLinkProps) => {
 
 TextLink.defaultProps = {
     before: '',
-    textLink: '',
-    after: ''
+    text: '',
+    after: '',
+    linkTo: ''
 }
 
 export default TextLink;
