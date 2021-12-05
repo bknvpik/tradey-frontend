@@ -25,6 +25,12 @@
     --primary-font: 'Montserrat', sans-serif;
     --base-font-lineheight: 1.5em;
 
+    /* font sizes */
+    --font-s: 1.3rem;
+    --font-m: 1.5rem;
+    --font-l: 2rem;
+    --font-xl: 2.5rem;
+
     /* margins, paddings */
     --mp-s: 0.5em;
     --mp-m: 1em;
@@ -38,4 +44,9 @@
     --mp-m-h: 0 1em 0 1em;
     --mp-l-h: 0 1.5em 0 1.5em;
 
+    /* breakpoints */
+    --medium-devices: 576px;
+    --large-devices: 768px;
+    --xlarge-devices: 992px;
+    --xxlarge-devices: 1400px;
 }

@@ -1,5 +1,5 @@
 .static {
-    height: 15em;
+    height: 40%;
 }
 
 .responsive {
@@ -14,6 +14,7 @@
 
 .img-container {
     width: 100%;
+    height: 75%;
 }
 
 .img-container img {

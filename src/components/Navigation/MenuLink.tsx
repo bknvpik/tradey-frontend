@@ -29,7 +29,7 @@ const MenuLink = (props: MenuLinkProps) => {
                         center={ FlexContainerCenter.ITEMS }
                         align={ FlexContainerAlign.END_CONTENT }
                     >
-                        <Paragraph text={ text } />
+                        <Paragraph children={ text } />
                     </FlexContainer>
                 </ContentContainer>
             </div>

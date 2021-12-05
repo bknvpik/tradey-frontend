@@ -1,10 +1,10 @@
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react'
 import styles from './styles.module.css';
-import Box from '../Box/Box';
 import Copyright from '../Copyright/Copyright';
-import { faFacebookF, faFacebookSquare, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookSquare, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
+import ContentContainer from '../ContentContainer/ContentContainer';
+import FlexContainer, { FlexContainerAlign } from '../FlexContainer/FlexContainer';
 
 const Footer = () => {
     const phone: number = 111222333;
@@ -14,25 +14,31 @@ const Footer = () => {
 
     return (
         <footer className={ styles.footer }>
-            <div className={ styles['footer-box'] }>
-                <a href={ `tel:${ phone }` } >
-                    <FontAwesomeIcon icon={ faPhone } />
-                </a>
-                <a href={ `mailto:${ eMail }`}>
-                    <FontAwesomeIcon icon={ faEnvelope } /> 
-                </a>
-                </div>
-                <div className={ styles['footer-box-center'] }>
-                    <Copyright />
-                </div>
-                <div className={ styles['footer-box'] }>
-                <a href={ fbUrl } target="_blank">
-                    <FontAwesomeIcon icon={ faFacebookSquare } />
-                </a>
-                <a href={ igUrl } target="_blank">
-                    <FontAwesomeIcon icon={ faInstagramSquare } />
-                </a>
-            </div>
+            <ContentContainer>
+                <FlexContainer
+                    flex={ 'flex-1' }
+                >
+                    <a href={ `tel:${ phone }` } className={ styles.link }>
+                        <FontAwesomeIcon icon={ faPhone } />
+                    </a>
+                    <a href={ `mailto:${ eMail }`} className={ styles.link }>
+                        <FontAwesomeIcon icon={ faEnvelope } />
+                    </a>
+                </FlexContainer>
+                <FlexContainer flex={ 'flex-3' }>
+                        <Copyright />
+                </FlexContainer>
+                <FlexContainer
+                    flex={ 'flex-1' }
+                >
+                    <a href={ fbUrl } target="_blank" className={ styles.link }>
+                        <FontAwesomeIcon icon={ faFacebookSquare } />
+                    </a>
+                    <a href={ igUrl } target="_blank" className={ styles.link }>
+                        <FontAwesomeIcon icon={ faInstagramSquare } />
+                    </a>
+                </FlexContainer>
+            </ContentContainer>
         </footer>
     )
 }

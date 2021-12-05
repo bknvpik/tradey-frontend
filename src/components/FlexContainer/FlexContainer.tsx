@@ -14,7 +14,9 @@ export const FlexContainerAlign = {
     END_CONTENT: 'end-content',
     END_ITEMS: 'end-items',
     BETWEEN_CONTENT: 'between-content',
-    BETWEEN_ITEMS: 'between-items'
+    BETWEEN_ITEMS: 'between-items',
+    AROUND_CONTENT: 'around-content',
+    AROUND_ITEMS: 'around-items'
 }
 
 const FlexContainer = (props: FlexContainerProps) => {

@@ -7,8 +7,8 @@
 }
 
 .center-all {
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .center-content {
@@ -41,6 +41,14 @@
 
 .between-items {
     align-items: space-between;
+}
+
+.around-content {
+    justify-content: space-around;
+}
+
+.around-items {
+    align-items: space-around;
 }
 
 .flex-1 {

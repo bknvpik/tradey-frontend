@@ -1,6 +1,6 @@
 .content-container {
     margin-inline: auto;
-    width: min(85%, 70rem);
+    width: min(85%, 90rem);
     min-height: 100%;
     display: flex;
 }

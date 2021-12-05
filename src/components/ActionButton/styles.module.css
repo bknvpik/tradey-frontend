@@ -7,8 +7,6 @@
     font-weight: 600;
     text-transform: uppercase;
     cursor: pointer;
-    position: relative;
-    z-index: 15;
     padding: 0.4em 2em;
 }
 

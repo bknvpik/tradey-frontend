@@ -5,7 +5,7 @@ import {
     Redirect
   } from "react-router-dom";
 import AddItem from "../pages/AddItem/AddItem";
-import { Browse } from "../pages/Browse/Browse";
+import Browse from "../pages/Browse/Browse";
 import Homepage from "../pages/Homepage/Homepage";
 import SignIn from "../pages/SignInPage/SignIn";
 import { SignOut } from "../pages/SignOut";
@@ -13,14 +13,16 @@ import SignUp from "../pages/SignUpPage/SignUp";
 import ProtectedRoute from "./ProtectedRoute";
 import ViewItem from "../pages/ViewItem/ViewItem";
 import ViewUser from "../pages/ViewUser/ViewUser";
-import { MakeOffer } from "../pages/MakeOffer/MakeOffer";
+import MakeOffer from "../pages/MakeOffer/MakeOffer";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
+import UserItems from "../pages/UserItems/UserItems";
+import { getUserFavoriteItems } from "../services/popularity.service";
+import { getUserItems } from "../services/items.service";
+import MyItems from "../pages/MyItems/MyItems";
 
 const Routing = (props: any) => {
-    const { auth } = useContext(AuthContext);
-    
     return (
         <Router>
             { props.children }
@@ -33,9 +35,11 @@ const Routing = (props: any) => {
                 <ProtectedRoute path="/add-item" component={ AddItem } exact />
                 <ProtectedRoute path="/sign-out" component={ SignOut } exact />
                 <ProtectedRoute path="/items/:id" component={ ViewItem } />
+                <ProtectedRoute path="/users/:id/items" element={ () => <UserItems type={ 'user' } apiCallback={ getUserItems } headerTxt={ 'User Items' } /> } />
                 <ProtectedRoute path="/users/:id" component={ ViewUser } />
                 <ProtectedRoute path="/make-offer/:id" component={ MakeOffer } />
-                <ProtectedRoute path="/view-user/:id" component={ ViewUser } />
+                <ProtectedRoute path="/my-favorites" component={ () => <UserItems apiCallback={ getUserFavoriteItems } headerTxt={ 'My Favorites' } /> } />
+                <ProtectedRoute path="/my-items" component={ () => <UserItems apiCallback={ getUserItems } headerTxt={ 'My Items' } /> } />
                 <Route component={ PageNotFound } />
             </Switch>
         </Router>

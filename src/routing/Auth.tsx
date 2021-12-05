@@ -11,8 +11,6 @@ const Auth = (props: {children: ReactNode}) => {
         sub: ''
     });
 
-    const url = window.location.pathname;
-
     useEffect(() => {
         getUser();
     }, [auth])

@@ -6,6 +6,7 @@
     top: 0;
     z-index: 100;
     display: flex;
+    user-select: none;
 }
 
 .navigation-mobile {
@@ -14,16 +15,6 @@
 
 .navigation-desktop {
     display: none;
-}
-
-@media only screen and (min-width: 900px) {
-    .navigation-mobile {
-        display: none;
-    }
-
-    .navigation-desktop {
-        display: block;
-    }
 }
 
 .toggle-menu {
@@ -45,11 +36,12 @@
     box-shadow: var(--shadow-drop);
 }
 
+
 .menu-link {
     background: white;
     box-shadow: var(--shadow-in);
     display: flex;
-    height: 4em;
+    height: 3.5em;
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
@@ -62,4 +54,56 @@
 .menu-link:active {
     background: var(--grey-1);
     color: var(--green-1);
+}
+
+.navigation-link {
+    all: unset;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.navigation-link:hover {
+    background: var(--green-1);
+}
+
+.navigation-link:active {
+    background: var(--grey-1);
+    color: var(--green-2);
+}
+
+.navigation-toggle-menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.navigation-toggle-menu:hover {
+    color: var(--green-1);
+}
+
+@media only screen and (min-width: 900px) {
+    .navigation {
+        height: 8%;
+    }
+
+    .navigation-mobile {
+        display: none;
+    }
+
+    .navigation-desktop {
+        display: block;
+    }
+    
+    .menu {
+        width: 25%;
+        right: 5%;
+    }
 }

@@ -2,6 +2,8 @@ import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEventHandler } from 'react';
 import ActionButton, { ButtonSize } from '../ActionButton/ActionButton';
+import FlexContainer, { FlexContainerAlign } from '../FlexContainer/FlexContainer';
+import Paragraph, { ParagraphSize } from '../Paragraph/Pragraph';
 import styles from './styles.module.css';
 
 export const LabelType = {
@@ -18,34 +20,47 @@ export type LabelProps = {
     trades?: number | undefined,
     buttonOnClick?: any;
     toggleLike?: any;
+    liked?: boolean;
 }
 
 const Label = (props: LabelProps) => {
-    const { type, name, likes, views, numberOfItems, trades, buttonOnClick, toggleLike } = props;
+    const { type, name, likes, views, numberOfItems, trades, buttonOnClick, toggleLike, liked } = props;
     
     return (
         <div className={ styles['label'] }>
-            <div className={ styles['detail'] }>
-                <p>{ name }</p>
-            </div>
-            <div className={ styles['detail'] }>
+            <FlexContainer flex={ 'flex-1' }>
+                <Paragraph children={ name } /> 
+            </FlexContainer>
+            <FlexContainer flex={ 'flex-1' }>
                 {type === LabelType.ITEM &&
                 <>
-                    <div className={ styles['data'] }>
-                        <FontAwesomeIcon icon={ faHeart } onClick={ toggleLike }/>
-                        <p>{ likes }</p>
-                    </div>
-                    <div className={ styles['data'] }>
+                    <FlexContainer
+                        flex={ 'flex-1' }
+                        align={ FlexContainerAlign.AROUND_CONTENT }
+                    >
+                        <FontAwesomeIcon icon={ faHeart } style={ liked ? { color: 'red', cursor: 'pointer' } : { cursor: 'pointer' } } onClick={ toggleLike }/>
+                        <Paragraph 
+                            children={ likes }
+                            size={ ParagraphSize.SMALL }
+                        />
+                    </FlexContainer>
+                    <FlexContainer flex={ 'flex-2' }>
                         <ActionButton
                             size={ ButtonSize.SMALL }
                             onClick={ buttonOnClick }
                             text={ 'trade' }
                         />
-                    </div>
-                    <div className={ styles['data'] }>
-                        <p>{ views }</p>
+                    </FlexContainer>
+                    <FlexContainer
+                        flex={ 'flex-1' }
+                        align={ FlexContainerAlign.AROUND_CONTENT }
+                    >
+                        <Paragraph
+                            children={ views }
+                            size={ ParagraphSize.SMALL }
+                        />
                         <FontAwesomeIcon icon={ faEye } />
-                    </div>
+                    </FlexContainer>
                 </>
                 }
                 {type === LabelType.USER &&
@@ -63,7 +78,7 @@ const Label = (props: LabelProps) => {
                     </div>
                 </>
                 }
-            </div>
+            </FlexContainer>
         </div>
     )
 }

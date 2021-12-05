@@ -21,7 +21,7 @@ const ToggleNested = (props: {open: boolean, toggle: () => void}) => {
                     center={ FlexContainerCenter.ITEMS }
                     align={ FlexContainerAlign.END_CONTENT }
                 >
-                    <Paragraph text={ 'my profile' } />
+                    <Paragraph children={ 'my profile' } />
                 </FlexContainer>
             </ContentContainer>
         </div>

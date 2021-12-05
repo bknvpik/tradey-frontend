@@ -1,9 +1,19 @@
-import styles from 'styles.module.css';
+import classNames from 'classnames';
+import { ReactNode } from 'react';
+import styles from './styles.module.css';
 
-const Paragraph = (props: {text: string}) => {
+export const ParagraphSize = {
+    SMALL: 'small',
+    MEDIUM: 'medium',
+    LARGE: 'large',
+}
+
+const Paragraph = (props: {children?: ReactNode, size?: string}) => {
+    const { children, size } = props;
+
     return (
-        <p>
-            { props.text }
+        <p className={ classNames(styles[size? size : ParagraphSize.MEDIUM]) }>
+            { children }
         </p>
     )
 }

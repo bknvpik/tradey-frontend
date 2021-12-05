@@ -1,15 +1,16 @@
 import { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react'
 import { GetItemInterface } from '../../interfaces/get-items.interface';
 import { HomepageBrowseLayout } from '../../layouts/HomepageBrowseLayout/HomepageBrowseLayout';
-import { getItems } from '../../services/items.service';
-import { allItems } from '../../_assets/apiUrls';
+import { AuthContext } from '../../routing/AuthContext';
+import { getUserItems } from '../../services/items.service';
 import Loading from '../Loading/Loading';
 
-const Browse = () => {
+const MyItems = () => {
+    const { user } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | AxiosError>();
-    const [items, setItems] = useState<GetItemInterface>({
+    const [myItems, setMyItems] = useState<GetItemInterface>({
         id: '',
         name: '',
         brand: '',
@@ -20,9 +21,10 @@ const Browse = () => {
     });
     
     useEffect(() => {
-        getItems(allItems)
+        getUserItems(user.sub)
         .then((res) => {
-            setItems(res.data);
+            console.log(res.data)
+            setMyItems(res.data);
         })
         .catch((err) => {
             setError(err);
@@ -37,12 +39,12 @@ const Browse = () => {
             { isLoading
                 ? <Loading />
                 : <HomepageBrowseLayout
-                    items={ items }
-                    headerTxt={ 'Browse Items' }
+                    items={ myItems }
+                    headerTxt={ 'My Items' }
                 />
             }
         </>
     )
 }
 
-export default Browse;
+export default MyItems;

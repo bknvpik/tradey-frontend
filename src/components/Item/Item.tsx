@@ -1,101 +1,94 @@
-import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useHistory } from 'react-router-dom';
-import ActionButton, { ButtonSize } from '../ActionButton/ActionButton';
-import Box from '../Box/Box';
 import Label from '../Label/Label';
 import Image, { ImageType } from '../Image/Image';
 import styles from './styles.module.css';
-import ItemImg from './ItemImg';
 import { useContext, useEffect, useState } from 'react';
-import httpCommon from '../../http-common';
 import { AuthContext } from '../../routing/AuthContext';
+import { dislike, getLikes, isLiked, like } from '../../services/popularity.service';
+import { AxiosResponse } from 'axios';
 
-export type ItemProps = {
-    id: string,
-    name: string,
-    description?: string,
-    brand?: string,
-    category: {id: string, category: string},
-    size: {id: string, size: string},
-    condition: {id: string, condition: string},
-    views?: number,
-    likes?: number,
-    images: {id: string, image: string}[],
+export interface ItemProps {
+    id: string;
+    name: string;
+    description?: string;
+    brand?: string;
+    category: {id: string, category: string};
+    size: {id: string, size: string};
+    condition: {id: string, condition: string};
+    views?: number;
+    likes?: number;
+    images: {id: string, image: string}[];
     select?: any;
     unselect?: any;
     type?: string;
+    checkSelected?: (id: string) => {};
 }
 
 const Item = (props: ItemProps) => {
     let history = useHistory();
-    const { user, isLoading, setIsLoading } = useContext(AuthContext);
-    const { id, name, views, images, select, unselect, type } = props;
-    const [likes, setLikes] = useState(0);
-    const [selected, setSelected] = useState(false);
+    const { user } = useContext(AuthContext);
+    const { id, name, views, images, select, unselect, type , checkSelected} = props;
+    const [likes, setLikes] = useState<number>(0);
     const [liked, setLiked] = useState(false);
     
     useEffect(() => {
-        if(user.sub) {
-        httpCommon.get(`popularity/item/${id}/user/${user.sub}/is-liked `)
-        .then((res: any) => {
+        getLikes(id)
+        .then((res) => {
+            console.log(res.data)
+            setLikes(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+        isLiked(id, user.sub)
+        .then((res) => {
             console.log(res.data)
             setLiked(res.data);
         })
-        
-    }
+        .catch((err) => {
+            console.log(err);
+        });
     }, [])
 
-    const trade = () => {
-        console.log('test');
-        console.log(id)
-        history.push(`/make-offer/${id}`);
+    const trade = (): void => {
+        history.push(`/make-offer/${ id }`);
     }
-
-    const handleSelect = () => {
-        select(id)
-        setSelected(true);
-        console.log(id)
+    
+    const toggleSelect = () => {
+        checkSelected?.(id)
+        ? unselect()
+        : select()
     }
-
-    const handleUnselect = () => {
-        unselect(id)
-        setSelected(false);
-        console.log(id)
-    }
-
-    const toggleLike = () => {
-        if(liked === false) {
-            httpCommon.post('/popularity/add-favorite', { user: user.sub, item: id });
-            httpCommon.get(`popularity/item/${id}/user/${user.sub}/is-liked `)
-            .then((res: any) => {
-                console.log(res.data)
-                setLiked(res.data);
-            })
-            console.log(liked)
-        }
+    
         
-        if(liked === true) {
-            httpCommon.delete('popularity/delete-favorite', { data: { user: user.sub, item: id } });
-            httpCommon.get(`popularity/item/${id}/user/${user.sub}/is-liked `)
-            .then((res: any) => {
-                console.log(res.data)
+    const updateItem = (f: (itemId: string, userId: string) => Promise<AxiosResponse<void>>) => {
+        f(id, user.sub)
+        .then(() => {
+            isLiked(id, user.sub)
+            .then((res) => {
                 setLiked(res.data);
             })
-            console.log(liked)
-        }
+        })
+        .then(() => {
+            getLikes(id)
+            .then((res: any) => {
+                setLikes(res.data);
+            })
+        })
+        .catch((err) => console.log(err));
     }
 
-    useEffect(() => {
-        console.log("should be updated")
-        httpCommon.get(`popularity/likes/item/${id}`)
-        .then((res: any) => {
-            setLikes(res.data);
-        })
-    }, [liked])
+    const handleLike = () => {
+        updateItem(like);
+    }
+
+    const handleDislike = () => {
+        updateItem(dislike);
+    }
 
     return (
-        <Box className={ styles['item-container'] }>
+        <div className={ styles.item }>
             <Link to={`/items/${ id }`} style={{ all: 'unset' }}>
                 <Image
                     type={ ImageType.ITEM }
@@ -106,10 +99,11 @@ const Item = (props: ItemProps) => {
                 name={ name }
                 views={ views }
                 likes={ likes }
-                buttonOnClick={ selected === false && type === 'offer' ? handleSelect : selected === true && type === 'offer' ? handleUnselect : trade }
-                toggleLike={ toggleLike }
+                buttonOnClick={ type === 'offer' ? toggleSelect : trade }
+                toggleLike={ liked? handleDislike : handleLike }
+                liked={ liked }
             />
-        </Box>
+        </div>
     )
 }
 
@@ -120,4 +114,5 @@ Item.defaultProps ={
     size: 'item_size',
     condition: 'item_condition',
 }
+
 export default Item;

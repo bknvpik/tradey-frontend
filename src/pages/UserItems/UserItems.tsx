@@ -1,12 +1,21 @@
-import { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 import { GetItemInterface } from '../../interfaces/get-items.interface';
 import { HomepageBrowseLayout } from '../../layouts/HomepageBrowseLayout/HomepageBrowseLayout';
-import { getItems } from '../../services/items.service';
-import { allItems } from '../../_assets/apiUrls';
+import { AuthContext } from '../../routing/AuthContext';
 import Loading from '../Loading/Loading';
 
-const Browse = () => {
+export interface UserItemsProps {
+    type?: string;
+    apiCallback: (userId: string) => Promise<AxiosResponse<any, any>>;
+    headerTxt: string;
+}
+
+const UserItems = (props: UserItemsProps) => {
+    const { id }: any = useParams();
+    const { type, apiCallback, headerTxt } = props;
+    const { user } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | AxiosError>();
     const [items, setItems] = useState<GetItemInterface>({
@@ -20,8 +29,12 @@ const Browse = () => {
     });
     
     useEffect(() => {
-        getItems(allItems)
+        type === 'user' && id.length > 0
+        ? apiCallback(id)
+        :
+        apiCallback(user.sub)
         .then((res) => {
+            console.log(res.data)
             setItems(res.data);
         })
         .catch((err) => {
@@ -38,11 +51,11 @@ const Browse = () => {
                 ? <Loading />
                 : <HomepageBrowseLayout
                     items={ items }
-                    headerTxt={ 'Browse Items' }
+                    headerTxt={ headerTxt }
                 />
             }
         </>
     )
 }
 
-export default Browse;
+export default UserItems;
