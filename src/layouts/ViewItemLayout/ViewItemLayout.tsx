@@ -15,11 +15,12 @@ import { itemImagesUrl } from '../../_assets/paths';
 import Label from '../../components/Label/Label';
 
 type Props = {
-    item: ItemProps;
+    item: any;
+    popularity: any;
 }
 
 const ViewItemLayout = (props: Props) => {
-    const { item } = props;
+    const { item, popularity } = props;
 
     const classProps = classnames(
         'fx-column',
@@ -33,8 +34,8 @@ const ViewItemLayout = (props: Props) => {
             <SlideShow images={ item.images } />
             <Label
                 name={ item.name }
-                views={ item.views }
-                likes={ item.likes }
+                views={ popularity.views }
+                likes={ popularity.likes }
             />
             <InfoBlock title={ 'description' }>
             </InfoBlock>

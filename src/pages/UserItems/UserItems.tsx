@@ -22,9 +22,10 @@ const UserItems = (props: UserItemsProps) => {
         id: '',
         name: '',
         brand: '',
-        likes: 0,
-        views: 0,
-        popularity: 0,
+        popularity: {
+            views: 0,
+            likes: 0
+        },
         images: [{id: '', image: ''}]
     });
     

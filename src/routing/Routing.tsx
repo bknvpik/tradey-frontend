@@ -15,12 +15,9 @@ import ViewItem from "../pages/ViewItem/ViewItem";
 import ViewUser from "../pages/ViewUser/ViewUser";
 import MakeOffer from "../pages/MakeOffer/MakeOffer";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
-import { AuthContext } from "./AuthContext";
-import { useContext } from "react";
 import UserItems from "../pages/UserItems/UserItems";
 import { getUserFavoriteItems } from "../services/popularity.service";
 import { getUserItems } from "../services/items.service";
-import MyItems from "../pages/MyItems/MyItems";
 
 const Routing = (props: any) => {
     return (
@@ -39,7 +36,7 @@ const Routing = (props: any) => {
                 <ProtectedRoute path="/users/:id" component={ ViewUser } />
                 <ProtectedRoute path="/make-offer/:id" component={ MakeOffer } />
                 <ProtectedRoute path="/my-favorites" component={ () => <UserItems apiCallback={ getUserFavoriteItems } headerTxt={ 'My Favorites' } /> } />
-                <ProtectedRoute path="/my-items" component={ () => <UserItems apiCallback={ getUserItems } headerTxt={ 'My Items' } /> } />
+                <ProtectedRoute path="/my-items" component={ () => <UserItems type={ 'my' } apiCallback={ getUserItems } headerTxt={ 'My Items' } /> } />
                 <Route component={ PageNotFound } />
             </Switch>
         </Router>

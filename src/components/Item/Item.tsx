@@ -4,8 +4,9 @@ import Image, { ImageType } from '../Image/Image';
 import styles from './styles.module.css';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../routing/AuthContext';
-import { dislike, getLikes, isLiked, like } from '../../services/popularity.service';
+import { dislike, getPopularity, isLiked, like } from '../../services/popularity.service';
 import { AxiosResponse } from 'axios';
+import { getItem } from '../../services/items.service';
 
 export interface ItemProps {
     id: string;
@@ -15,8 +16,6 @@ export interface ItemProps {
     category: {id: string, category: string};
     size: {id: string, size: string};
     condition: {id: string, condition: string};
-    views?: number;
-    likes?: number;
     images: {id: string, image: string}[];
     select?: any;
     unselect?: any;
@@ -24,32 +23,41 @@ export interface ItemProps {
     checkSelected?: (id: string) => {};
 }
 
+export interface PopularityDto {
+    views: number;
+    likes: number;
+}
+
 const Item = (props: ItemProps) => {
     let history = useHistory();
     const { user } = useContext(AuthContext);
-    const { id, name, views, images, select, unselect, type , checkSelected} = props;
-    const [likes, setLikes] = useState<number>(0);
+    const { id, name, images, select, unselect, type , checkSelected } = props;
     const [liked, setLiked] = useState(false);
+    const [popularity, setPopularity] = useState<PopularityDto>({
+        views: 0,
+        likes: 0
+    });
     
     useEffect(() => {
-        getLikes(id)
+        getPopularity(id)
         .then((res) => {
+            setPopularity(res.data)
             console.log(res.data)
-            setLikes(res.data);
         })
-        .catch(err => {
-            console.log(err);
-        });
-
         isLiked(id, user.sub)
         .then((res) => {
-            console.log(res.data)
             setLiked(res.data);
         })
         .catch((err) => {
             console.log(err);
         });
     }, [])
+
+    useEffect(() => {
+        getPopularity(id)
+        .then((res) => setPopularity(res.data))
+        .catch((err) => console.log(err))
+    }, [liked])
 
     const trade = (): void => {
         history.push(`/make-offer/${ id }`);
@@ -68,12 +76,6 @@ const Item = (props: ItemProps) => {
             isLiked(id, user.sub)
             .then((res) => {
                 setLiked(res.data);
-            })
-        })
-        .then(() => {
-            getLikes(id)
-            .then((res: any) => {
-                setLikes(res.data);
             })
         })
         .catch((err) => console.log(err));
@@ -97,8 +99,8 @@ const Item = (props: ItemProps) => {
             </Link>
             <Label
                 name={ name }
-                views={ views }
-                likes={ likes }
+                views={ popularity.views }
+                likes={ popularity.likes }
                 buttonOnClick={ type === 'offer' ? toggleSelect : trade }
                 toggleLike={ liked? handleDislike : handleLike }
                 liked={ liked }

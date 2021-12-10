@@ -38,7 +38,7 @@ const AddItem = () => {
         condition: 1,
         size: 1,
         brand: '',
-        user: ''
+        user: '',
     });
 
     useEffect(() => {

@@ -85,8 +85,8 @@ const MakeOffer = () => {
         console.log(user.sub)
         console.log(userId)
         axios.all([
-            http.get(`items/user/${user.sub}`, { withCredentials: true }),
-            http.get(`items/user/${userId}`, { withCredentials: true })
+            http.get(`items/users/${user.sub}`, { withCredentials: true }),
+            http.get(`items/users/${userId}`, { withCredentials: true })
         ]).then(axios.spread((...responses: any) => {
             setMyItems(responses[0].data);
             setUserItems(responses[1].data);
@@ -152,7 +152,6 @@ const MakeOffer = () => {
                                     key={ item.id }
                                     id={ item.id }
                                     name={ item.name }
-                                    views={ item.views }
                                     images={ item.images }
                                     checkSelected= { checkSelected }
                                     select={ ()=>dispatch({type: 'select', owner: 'me', payload: item.id}) }
@@ -170,7 +169,6 @@ const MakeOffer = () => {
                                     key={ item.id }
                                     id={ item.id }
                                     name={ item.name }
-                                    views={ item.views }
                                     images={ item.images }
                                     checkSelected= { checkSelected }
                                     select={ ()=>dispatch({type: 'select', owner: 'user', payload: item.id}) }

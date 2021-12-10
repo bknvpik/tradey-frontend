@@ -13,9 +13,7 @@ const Browse = () => {
         id: '',
         name: '',
         brand: '',
-        likes: 0,
-        views: 0,
-        popularity: 0,
+        calculatedPopularity: 0,
         images: [{id: '', image: ''}]
     });
     

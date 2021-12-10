@@ -12,10 +12,8 @@ const Homepage = () => {
         id: '',
         name: '',
         brand: '',
-        likes: 0,
-        views: 0,
-        popularity: 0,
-        images: [{id: '', image: ''}]
+        images: [{id: '', image: ''}],
+        calculatedPopularity: 0
     });
 
     useEffect(() => {
