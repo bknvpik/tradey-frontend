@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../routing/AuthContext';
 import { dislike, getPopularity, isLiked, like } from '../../services/popularity.service';
 import { AxiosResponse } from 'axios';
-import { getItem } from '../../services/items.service';
+import { checkOwner, getItem } from '../../services/items.service';
 
 export interface ItemProps {
     id: string;
@@ -33,12 +33,18 @@ const Item = (props: ItemProps) => {
     const { user } = useContext(AuthContext);
     const { id, name, images, select, unselect, type , checkSelected } = props;
     const [liked, setLiked] = useState(false);
+    const [owner, setOwner] = useState(false);
     const [popularity, setPopularity] = useState<PopularityDto>({
         views: 0,
         likes: 0
     });
     
     useEffect(() => {
+        checkOwner(id, user.sub)
+        .then(res => {
+            setOwner(res.data)
+        })
+        
         getPopularity(id)
         .then((res) => {
             setPopularity(res.data)
@@ -102,7 +108,7 @@ const Item = (props: ItemProps) => {
                 views={ popularity.views }
                 likes={ popularity.likes }
                 buttonOnClick={ type === 'offer' ? toggleSelect : trade }
-                toggleLike={ liked? handleDislike : handleLike }
+                toggleLike={ owner === false ? (liked? handleDislike : handleLike) : null }
                 liked={ liked }
             />
         </div>
