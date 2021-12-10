@@ -1,11 +1,17 @@
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .small {
-    width: 5em;
+    width: 3em;
 }
 
 .medium {
-    width: 10em;
+    width: 5em;
 }
 
 .large {
-    width: 15em;
+    width: 7em;
 }

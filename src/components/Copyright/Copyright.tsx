@@ -1,9 +1,9 @@
 import React from 'react'
-import './styles.module.css';
+import styles from './styles.module.css';
 
 const Copyright = () => {
     return (
-        <p>
+        <p className={ styles.copyright }>
             &copy; 2021<strong> TRADEY</strong>
         </p>
     )

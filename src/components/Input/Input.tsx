@@ -8,42 +8,53 @@ export const InputType = {
     TEXT:'text'
 }
 
-export type InputProps = {
-    type: string,
-    name: string,
-    placeholder: string,
-    value: string,
-    onChange: ChangeEventHandler<HTMLInputElement>,
-    className?: string
+export const InputTheme = {
+    UNDERLINED: 'underlined',
+    BLANK: 'blank'
+}
+
+export interface InputProps {
+    type?: string;
+    theme?: string;
+    name: string;
+    placeholder: string;
+    value: string;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    isError?: string;
 }
 
 const Input = (props: InputProps) => {
-    const { type, name, placeholder, value, className, onChange } = props;
+    const { type, name, placeholder, value, theme, onChange, isError } = props;
     const classProps = classnames(
-        styles.input,
+        styles[theme? theme: InputTheme.UNDERLINED],
+        styles[isError? 'invalid': 'valid'],
         styles.small,
-        className
     )
     return (
-        <input 
-            type={ type }
-            name={ name }
-            placeholder={ placeholder }
-            value={ value}
-            onChange={ onChange }
-            className= { classProps }
-        >  
-        </input>
+        <>
+            <input 
+                type={ type }
+                name={ name }
+                placeholder={ placeholder }
+                value={ value}
+                onChange={ onChange }
+                className= { classProps }
+            >  
+            </input>
+            { theme === InputTheme.UNDERLINED &&
+                <small className={ styles['error'] }>{ isError }</small>
+            }
+        </>
     )
 }
 
 Input.defaultProps = {
     type: InputType.TEXT,
     name: '',
+    theme: InputTheme.UNDERLINED,
     placeholder: '',
     value: '',
     onChange: () => {},
-    className: '',
 }
 
 export default Input;

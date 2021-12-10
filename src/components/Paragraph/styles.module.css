@@ -1,0 +1,7 @@
+.small {
+    font-size: var(--font-s)
+}
+
+.medium {
+    font-size: var(--font-m);
+}

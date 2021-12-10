@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import {ReactComponent as Image} from '../../_assets/logo.svg';
+import {ReactComponent as Img} from '../../_assets/logo.svg';
 import styles from './styles.module.css';
 
 export const LogoSize = {
@@ -10,19 +10,13 @@ export const LogoSize = {
 
 export const Logo = (props: { size?: string }) => {
     const classProps = classnames(
-        styles['img-container'],
-        'fx-row',
-        'fx-center-all',
+        styles['logo-container'],
         styles[props.size? props.size: LogoSize.MEDIUM],
     )
 
     return (
         <div className={ classProps }>
-            <Image />
+            <Img />
         </div>
     )
-}
-
-Logo.defaultProps = {
-    size: LogoSize.MEDIUM,
 }

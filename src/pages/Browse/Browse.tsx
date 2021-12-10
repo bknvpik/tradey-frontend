@@ -1,19 +1,46 @@
+import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import styles from 'styles.module.css';
-import http from '../../http-common';
-import { BrowseLayout } from '../../layouts/BrowseLayout/BrowseLayout';
+import { GetItemInterface } from '../../interfaces/get-items.interface';
+import { HomepageBrowseLayout } from '../../layouts/HomepageBrowseLayout/HomepageBrowseLayout';
+import { getItems } from '../../services/items.service';
+import { allItems } from '../../_assets/apiUrls';
+import Loading from '../Loading/Loading';
 
-export const Browse = () => {
-    const [items, setItems] = useState([]);
+const Browse = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [error, setError] = useState<Error | AxiosError>();
+    const [items, setItems] = useState<GetItemInterface>({
+        id: '',
+        name: '',
+        brand: '',
+        calculatedPopularity: 0,
+        images: [{id: '', image: ''}]
+    });
+    
     useEffect(() => {
-        http.get('items', { withCredentials: true })
-        .then((res: any) => {
+        getItems(allItems)
+        .then((res) => {
             setItems(res.data);
-            console.log(res.data)
         })
+        .catch((err) => {
+            setError(err);
+        })
+        .then(() => {
+            setIsLoading(false)
+        });
     }, []);
     
     return (
-        <BrowseLayout items={ items } />
+        <>
+            { isLoading
+                ? <Loading />
+                : <HomepageBrowseLayout
+                    items={ items }
+                    headerTxt={ 'Browse Items' }
+                />
+            }
+        </>
     )
 }
+
+export default Browse;

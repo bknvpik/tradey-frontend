@@ -3,6 +3,10 @@
     width: min(80%, 70rem);
 }
 
+.shadow-drop {
+    box-shadow: var(--shadow-drop);
+}
+
 .w-100 {
     width: 100%;
 }
@@ -16,11 +20,27 @@
     height: 100%;
 }
 
+.m-small {
+    margin: 0.5em;
+}
+
 .m-h-small {
-    margin: 0 1em 0 1em;
+    margin: 0 0.5em 0 0.5em;
+}
+
+.p-small {
+    padding: 0.5em;
+}
+
+.p-medium {
+    padding: 1em;
 }
 
 .p-h-small {
+    padding: 0 0.5em 0 0.5em;
+}
+
+.p-h-medium {
     padding: 0 1em 0 1em;
 }
 
@@ -50,6 +70,10 @@
 
 .bg-green-2 {
     background: var(--green-2);
+}
+
+.font-green-1 {
+    color: var(--green-1);
 }
 
 .shadow-in {

@@ -1,0 +1,1 @@
+export const correctInputs = 'Make sure that all inputs are filled correctly!';

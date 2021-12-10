@@ -1,9 +1,9 @@
 import { FormEventHandler, ReactNode } from "react";
 import styles from './styles.module.css';
 
-export type FormProps = {
-    onSubmit: FormEventHandler,
-    children: ReactNode
+export interface FormProps {
+    onSubmit: FormEventHandler;
+    children: ReactNode;
 }
 
 export const Form = (props: FormProps) => {

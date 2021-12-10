@@ -1,0 +1,26 @@
+.item-container {
+    display: grid;
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-auto-rows: auto;
+    grid-gap: 1em;
+}
+
+@media only screen and (min-width: 576px) {
+    .item-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .item-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .item-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}

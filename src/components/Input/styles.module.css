@@ -1,10 +1,15 @@
-.input {
+.underlined {
     all: unset;
     border-bottom: solid 4px var(--green-2);
     text-align: center;
 }
 
-.input:focus {
+.blank {
+    all: unset;
+    text-align: center;
+}
+
+.underlined:focus {
     border-color: var(--green-1);
 }
 
@@ -22,4 +27,24 @@
 
 .large {
 
+}
+
+.error {
+    height: 3em;
+    width: 20em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--error);
+    font-size: 0.6em;
+    margin-bottom: var(--mp-s);
+    text-align: center;
+}
+
+.valid:focus {
+    border-color: var(--green-1);
+}
+
+.invalid, .invalid:focus {
+    border-color: var(--error-bg);
 }
